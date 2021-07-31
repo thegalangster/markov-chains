@@ -65,10 +65,24 @@ def make_text(chains):
 
     words = []
 
-    # your code goes here
+    #pick random key
 
-    return ' '.join(words)
+    selected_key = choice(list(chains.keys()))
+    words.append(selected_key[0])
+    words.append(selected_key[1])
+    
+    #pick random value from that key
+    #loop until error
+    while True:
+        #from that key, pick random value
+        if chains.get(selected_key) is not None:
+            random_word = choice(chains[selected_key])
+            words.append(random_word)
+        else:
+            return ' '.join(words)
 
+        #from the string that's created, pick the last two words - find that key in the dictionary
+        selected_key = (words[-2], words[-1])
 
 input_path = 'green-eggs.txt'
 
