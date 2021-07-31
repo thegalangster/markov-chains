@@ -10,12 +10,13 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    # your code goes here
+    file_object = open(file_path)
+    file_as_string = file_object.read()
 
-    return 'Contents of your file as one long string'
+    return file_as_string.replace("\n", " ").rstrip()
 
 
-def make_chains(text_string):
+def make_chains(text_string ):
     """Take input text as string; return dictionary of Markov chains.
 
     A chain will be a key that consists of a tuple of (word1, word2)
@@ -41,8 +42,20 @@ def make_chains(text_string):
     """
 
     chains = {}
+    value_list = ["text"]
+    words = text_string.split()
 
-    # your code goes here
+    # iterate through each index in words until the length of index minus 2
+    # (value at index, value at index + 1): append to list value at index + 2
+
+    for index in range(0, len(words)-2):
+        # chains.get([(words[index], words[index+1])]) = words[index+2]
+        key = (words[index], words[index+1])
+        value = words[index+2]
+
+        existing_value = chains.get(key, [])
+        existing_value.append(value)
+        chains[key] = existing_value
 
     return chains
 
